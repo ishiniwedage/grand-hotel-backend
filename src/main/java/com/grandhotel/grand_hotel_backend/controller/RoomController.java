@@ -1,43 +1,43 @@
 package com.grandhotel.grand_hotel_backend.controller;
 
-import com.grandhotel.grand_hotel_backend.model.RoomAccess;
-import com.grandhotel.grand_hotel_backend.model.Staff;
-import com.grandhotel.grand_hotel_backend.service.StaffService;
+import com.grandhotel.grand_hotel_backend.model.Room;
+import com.grandhotel.grand_hotel_backend.service.RoomService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/staff")
+@RequestMapping("/api/rooms")
 @CrossOrigin(origins = "http://localhost:3000")
-public class StaffController {
+public class RoomController {
 
-    private final StaffService staffService;
+    private final RoomService roomService;
 
-    public StaffController(StaffService staffService) {
-        this.staffService = staffService;
+    public RoomController(RoomService roomService) {
+        this.roomService = roomService;
     }
 
     @GetMapping
-    public ResponseEntity<List<Staff>> getAllStaff() {
-        return ResponseEntity.ok(staffService.getAllStaff());
+    public ResponseEntity<List<Room>> getAllRooms() {
+        return ResponseEntity.ok(roomService.getAllRooms());
     }
 
-    @GetMapping("/{employeeId}")
-    public ResponseEntity<Staff> getStaff(@PathVariable String employeeId) {
-        return ResponseEntity.ok(staffService.getStaffByEmployeeId(employeeId));
+    @GetMapping("/{roomNumber}")
+    public ResponseEntity<Room> getRoomByNumber(
+            @PathVariable int roomNumber) {
+        return ResponseEntity.ok(
+            roomService.getRoomByNumber(roomNumber));
     }
 
-    @PostMapping("/access")
-    public ResponseEntity<RoomAccess> logAccess(
-            @RequestParam String employeeId,
-            @RequestParam int roomNumber,
-            @RequestParam String reason) {
-        return ResponseEntity.ok(staffService.logRoomAccess(employeeId, roomNumber, reason));
+    @PostMapping
+    public ResponseEntity<Room> createRoom(@RequestBody Room room) {
+        return ResponseEntity.ok(roomService.createRoom(room));
     }
 
-    @GetMapping("/access/{roomNumber}")
-    public ResponseEntity<List<RoomAccess>> getAccessLog(@PathVariable int roomNumber) {
-        return ResponseEntity.ok(staffService.getAccessLogByRoom(roomNumber));
+    @DeleteMapping("/{roomNumber}")
+    public ResponseEntity<Void> deleteRoom(
+            @PathVariable int roomNumber) {
+        roomService.deleteRoom(roomNumber);
+        return ResponseEntity.ok().build();
     }
 }

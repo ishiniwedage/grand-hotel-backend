@@ -15,4 +15,8 @@ public class Room {
     private String roomType;
     private boolean available;
     private double pricePerNight;
+
+    public boolean isAvailable() {
+        return available;
+    }
 }

@@ -1,5 +1,4 @@
 package com.grandhotel.grand_hotel_backend.controller;
-package com.grandhotel.grand_hotel_backend.controller;
 
 import com.grandhotel.grand_hotel_backend.model.RoomAccess;
 import com.grandhotel.grand_hotel_backend.model.Staff;
