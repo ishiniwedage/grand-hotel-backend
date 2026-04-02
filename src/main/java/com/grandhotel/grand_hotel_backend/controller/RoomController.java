@@ -1,10 +1,16 @@
 package com.grandhotel.grand_hotel_backend.controller;
 
+import java.util.List;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.grandhotel.grand_hotel_backend.model.Room;
 import com.grandhotel.grand_hotel_backend.service.RoomService;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/rooms")
@@ -23,21 +29,12 @@ public class RoomController {
     }
 
     @GetMapping("/{roomNumber}")
-    public ResponseEntity<Room> getRoomByNumber(
-            @PathVariable int roomNumber) {
-        return ResponseEntity.ok(
-            roomService.getRoomByNumber(roomNumber));
+    public ResponseEntity<Room> getRoomByNumber(@PathVariable int roomNumber) {
+        return ResponseEntity.ok(roomService.getRoomByNumber(roomNumber));
     }
 
-    @PostMapping
-    public ResponseEntity<Room> createRoom(@RequestBody Room room) {
-        return ResponseEntity.ok(roomService.createRoom(room));
-    }
-
-    @DeleteMapping("/{roomNumber}")
-    public ResponseEntity<Void> deleteRoom(
-            @PathVariable int roomNumber) {
-        roomService.deleteRoom(roomNumber);
-        return ResponseEntity.ok().build();
+    @GetMapping("/{roomNumber}/availability")
+    public ResponseEntity<Boolean> checkAvailability(@PathVariable int roomNumber) {
+        return ResponseEntity.ok(roomService.isRoomAvailable(roomNumber));
     }
 }

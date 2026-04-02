@@ -1,13 +1,20 @@
 package com.grandhotel.grand_hotel_backend;
 
-import com.grandhotel.grand_hotel_backend.model.*;
-import com.grandhotel.grand_hotel_backend.repository.*;
+import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
-import java.util.List;
+import com.grandhotel.grand_hotel_backend.model.Booking;
+import com.grandhotel.grand_hotel_backend.model.Guest;
+import com.grandhotel.grand_hotel_backend.model.Room;
+import com.grandhotel.grand_hotel_backend.model.Staff;
+import com.grandhotel.grand_hotel_backend.repository.BookingRepository;
+import com.grandhotel.grand_hotel_backend.repository.GuestRepository;
+import com.grandhotel.grand_hotel_backend.repository.RoomAccessRepository;
+import com.grandhotel.grand_hotel_backend.repository.RoomRepository;
+import com.grandhotel.grand_hotel_backend.repository.StaffRepository;
 
 @Component
 public class DataSeeder implements CommandLineRunner {
@@ -16,7 +23,7 @@ public class DataSeeder implements CommandLineRunner {
     private final RoomRepository roomRepository;
     private final BookingRepository bookingRepository;
     private final StaffRepository staffRepository;
-    private final RoomAccessRepository roomAccessRepository;
+    
 
     public DataSeeder(
             GuestRepository guestRepository,
@@ -29,7 +36,7 @@ public class DataSeeder implements CommandLineRunner {
         this.roomRepository = roomRepository;
         this.bookingRepository = bookingRepository;
         this.staffRepository = staffRepository;
-        this.roomAccessRepository = roomAccessRepository;
+        
     }
 
     @Override

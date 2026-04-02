@@ -27,14 +27,8 @@ public class GuestController {
         return ResponseEntity.ok(guestService.getGuestById(id));
     }
 
-    @PostMapping
-    public ResponseEntity<Guest> createGuest(@RequestBody Guest guest) {
-        return ResponseEntity.ok(guestService.createGuest(guest));
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteGuest(@PathVariable String id) {
-        guestService.deleteGuest(id);
-        return ResponseEntity.ok().build();
+    @GetMapping("/national/{nationalId}")
+    public ResponseEntity<Guest> getGuestByNationalId(@PathVariable String nationalId) {
+        return ResponseEntity.ok(guestService.getGuestByNationalId(nationalId));
     }
 }
